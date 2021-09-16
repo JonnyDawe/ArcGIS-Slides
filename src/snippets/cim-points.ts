@@ -6,7 +6,10 @@ import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer'
 import SimpleLineSymbol from '@arcgis/core/symbols/SimpleLineSymbol'
 import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol'
 import PopupTemplate from '@arcgis/core/PopupTemplate'
-import { generateCapacitySymbol, generateCIMParkingSymbol } from './commonsymbols'
+import {
+    generateCapacitySymbol,
+    generateCIMParkingSymbol,
+} from './commonsymbols'
 
 const mockData: {
     location: number[]
@@ -95,4 +98,3 @@ function play(message: string) {
             break
     }
 }
-

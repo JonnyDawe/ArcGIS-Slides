@@ -3,8 +3,7 @@ import './styles/main.css'
 import Reveal from 'reveal.js'
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js'
 import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js'
-
-;(Reveal as RevealStatic)
+(Reveal as RevealStatic)
     .initialize({
         center: true,
         transition: 'slide',
@@ -16,17 +15,21 @@ import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js'
     })
     .then(() => {
         let playButtons = document.querySelectorAll('[data-play-frame]')
-        let inputs = document.querySelectorAll("[data-input-frame]")
+        let inputs = document.querySelectorAll('[data-input-frame]')
 
         for (let i = 0; i < playButtons.length; i++) {
             playButtons[i].addEventListener(
                 'click',
-                (function (frameName: string, argument:string, classList:DOMTokenList) {
+                (function (
+                    frameName: string,
+                    argument: string,
+                    classList: DOMTokenList
+                ) {
                     return function (event: UIEvent) {
-                        event.stopPropagation();
-                        event.preventDefault();
-                        classList.add("clicked");
-                        
+                        event.stopPropagation()
+                        event.preventDefault()
+                        classList.add('clicked')
+
                         window.frames[frameName].contentWindow.postMessage(
                             { play: true, argument: argument },
                             '*'
@@ -45,16 +48,20 @@ import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js'
             })
         }
 
-
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].addEventListener(
                 'change',
-                (function (frameName: string, inputType:string) {
+                (function (frameName: string, inputType: string) {
                     return function (event: InputEvent) {
-                        event.stopPropagation();
-                        event.preventDefault();
+                        event.stopPropagation()
+                        event.preventDefault()
                         window.frames[frameName].contentWindow.postMessage(
-                            { input: true, inputType ,argument: (event.target as HTMLInputElement).value },
+                            {
+                                input: true,
+                                inputType,
+                                argument: (event.target as HTMLInputElement)
+                                    .value,
+                            },
                             '*'
                         )
                     }

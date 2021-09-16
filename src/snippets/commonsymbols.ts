@@ -13,13 +13,9 @@ function circleGenerator({
     centre: { x: number; y: number }
     radius: number
     numberOfPoints: number
-}):number[][] {
+}): number[][] {
     let points = []
-    for (
-        let i = 0;
-        i <= 2 * Math.PI;
-        i += (2 * Math.PI) / numberOfPoints
-    ) {
+    for (let i = 0; i <= 2 * Math.PI; i += (2 * Math.PI) / numberOfPoints) {
         points.push([
             centre.x + radius * Math.cos(i),
             centre.y + radius * Math.sin(i),
@@ -28,26 +24,24 @@ function circleGenerator({
     return points
 }
 
- /**
-   * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
-   *
-   * @param {String} text The text to be rendered.
-   * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
-   *
-   * @see http://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
-   */
-  function getTextWidth(text:string, font:string) {
+/**
+ * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
+ *
+ * @param {String} text The text to be rendered.
+ * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
+ *
+ * @see http://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
+ */
+function getTextWidth(text: string, font: string) {
     // re-use canvas object for better performance
     const canvas =
-      (getTextWidth as any).canvas ||
-      ((getTextWidth as any).canvas = document.createElement("canvas"));
-    const context = canvas.getContext("2d");
-    context.font = font;
-    const metrics = context.measureText(text);
-    return metrics.width;
-  }
-
-
+        (getTextWidth as any).canvas ||
+        ((getTextWidth as any).canvas = document.createElement('canvas'))
+    const context = canvas.getContext('2d')
+    context.font = font
+    const metrics = context.measureText(text)
+    return metrics.width
+}
 
 /* ##################### CIM Point Symbols ########################### */
 
@@ -155,9 +149,8 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
     })
 }
 
-
 /**
- * Generate a Parking Symbol with a capacity bar. If there is no capacity 
+ * Generate a Parking Symbol with a capacity bar. If there is no capacity
  * show a red warning icon.
  */
 export function generateCapacitySymbol({
@@ -166,7 +159,7 @@ export function generateCapacitySymbol({
 }: {
     maxCapacity: number
     availableCapacity: number
-}):__esri.CIMSymbol {
+}): __esri.CIMSymbol {
     let fractionFilled = (maxCapacity - availableCapacity) / maxCapacity
 
     return new CIMSymbol({
@@ -369,7 +362,7 @@ const redExclamation: __esri.CIM.CIMMarkerGraphic[] = [
 
 /* ##################### CIM Line Symbols ########################### */
 
-export function simpleDashedCIM(): __esri.CIMSymbol{
+export function simpleDashedCIM(): __esri.CIMSymbol {
     return new CIMSymbol({
         data: {
             type: 'CIMSymbolReference',
@@ -417,11 +410,9 @@ export function simpleDashedCIM(): __esri.CIMSymbol{
     })
 }
 
-
-
 /**
- * Generate a plane with contrails and a start marker. 
- * 
+ * Generate a plane with contrails and a start marker.
+ *
  * The position indicates where on the line to put the plane marker icon.
  * (0 = start <---> 1 = end )
  */
@@ -2081,18 +2072,23 @@ export function generatePlane(position: number): __esri.CIMSymbol {
     })
 }
 
-
 /* ##################### CIM Text Symbols ########################### */
 
 /**
-   * Constructs a CIM Text Label with a rectangle background which grows with the text input.
-   * @param textString 
-   * @param angleDegrees 
-   */
- export function constructCIMTextLabel({textString, angleDegrees}:{textString: string, angleDegrees: number}): __esri.CIMSymbol {
-    // Get the ratio of the text string width in pts (1pt = 0.75px) to the height of the 
-    // text. Use this to scale the background polygon wrapper. 
-    let ratio = (getTextWidth(textString, "1pt arial") * 0.75)
+ * Constructs a CIM Text Label with a rectangle background which grows with the text input.
+ * @param textString
+ * @param angleDegrees
+ */
+export function constructCIMTextLabel({
+    textString,
+    angleDegrees,
+}: {
+    textString: string
+    angleDegrees: number
+}): __esri.CIMSymbol {
+    // Get the ratio of the text string width in pts (1pt = 0.75px) to the height of the
+    // text. Use this to scale the background polygon wrapper.
+    let ratio = getTextWidth(textString, '1pt arial') * 0.75
 
     let xmax = (ratio / 2) * 200
     let xmin = 0 - xmax
@@ -2102,201 +2098,215 @@ export function generatePlane(position: number): __esri.CIMSymbol {
 
     //Return CIM Symbol data
     return new CIMSymbol({
-      data: {
-        type: "CIMSymbolReference",
-        symbol: {
-          type: "CIMPointSymbol",
-          symbolLayers: [
-            {
-              type: "CIMVectorMarker",
-              enable: true,
-              size: 20,
-              rotation: angleDegrees,
-              rotateClockwise: true,
-              respectFrame: true,
-              colorLocked: true,
-              anchorPointUnits: "Relative",
-              frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
-              markerGraphics: [
-                // ******* Text Symbol *********
-                {
-                  type: "CIMMarkerGraphic",
-                  geometry: { x: 0, y: 0 },
-                  symbol: {
-                    type: "CIMTextSymbol",
-                    fontFamilyName: "arial",
-                    // fontStyleName: "Bold",
-                    angle: angleDegrees,
-                    height: 200,
-                    horizontalAlignment: "Center",
-                    offsetX: 0,
-                    offsetY: 0,
-                    symbol: {
-                      type: "CIMPolygonSymbol",
-                      symbolLayers: [
-                        {
-                          type: "CIMSolidFill",
-                          enable: true,
-                          // Text Color
-                          color: [255, 255, 255, 255]
-                        }
-                      ]
-                    },
-                    verticalAlignment: "Center"
-                  },
-                  textString: textString
-                },
-                // ******* Polygon Background Symbol *********
-                {
-                  type: "CIMMarkerGraphic",
-                  geometry: {
-                    rings: [
-                      [
-                        [xmin - padding, -120],
-                        [xmin - (50 + padding), -30],
-                        [xmin - (50 + padding), 30],
-                        [xmin - padding, 120],
-                        [xmax + padding, 120],
-                        [xmax + (50 + padding), 30],
-                        [xmax + (50 + padding), -30],
-                        [xmax + padding, -120]
-                      ]
-                    ]
-                  },
-                  symbol: {
-                    type: "CIMPolygonSymbol",
-                    symbolLayers: [{
-                      type: "CIMSolidStroke",
-                      width: 10,
-                      enable: true,
-                      joinStyle:'Round',
-                      capStyle:"Square",
-                      color: [255, 255, 255, 255]
-                    },
+        data: {
+            type: 'CIMSymbolReference',
+            symbol: {
+                type: 'CIMPointSymbol',
+                symbolLayers: [
                     {
-                      type: "CIMSolidFill",
-                      enable: true,
-                      color: [39, 129, 153, 255]
-                    }
-
-                    ]
-                  }
-                }
-              ],
-              scaleSymbolsProportionally: true
-            }
-          ]
-        }
-      }
-
+                        type: 'CIMVectorMarker',
+                        enable: true,
+                        size: 20,
+                        rotation: angleDegrees,
+                        rotateClockwise: true,
+                        respectFrame: true,
+                        colorLocked: true,
+                        anchorPointUnits: 'Relative',
+                        frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
+                        markerGraphics: [
+                            // ******* Text Symbol *********
+                            {
+                                type: 'CIMMarkerGraphic',
+                                geometry: { x: 0, y: 0 },
+                                symbol: {
+                                    type: 'CIMTextSymbol',
+                                    fontFamilyName: 'arial',
+                                    // fontStyleName: "Bold",
+                                    angle: angleDegrees,
+                                    height: 200,
+                                    horizontalAlignment: 'Center',
+                                    offsetX: 0,
+                                    offsetY: 0,
+                                    symbol: {
+                                        type: 'CIMPolygonSymbol',
+                                        symbolLayers: [
+                                            {
+                                                type: 'CIMSolidFill',
+                                                enable: true,
+                                                // Text Color
+                                                color: [255, 255, 255, 255],
+                                            },
+                                        ],
+                                    },
+                                    verticalAlignment: 'Center',
+                                },
+                                textString: textString,
+                            },
+                            // ******* Polygon Background Symbol *********
+                            {
+                                type: 'CIMMarkerGraphic',
+                                geometry: {
+                                    rings: [
+                                        [
+                                            [xmin - padding, -120],
+                                            [xmin - (50 + padding), -30],
+                                            [xmin - (50 + padding), 30],
+                                            [xmin - padding, 120],
+                                            [xmax + padding, 120],
+                                            [xmax + (50 + padding), 30],
+                                            [xmax + (50 + padding), -30],
+                                            [xmax + padding, -120],
+                                        ],
+                                    ],
+                                },
+                                symbol: {
+                                    type: 'CIMPolygonSymbol',
+                                    symbolLayers: [
+                                        {
+                                            type: 'CIMSolidStroke',
+                                            width: 10,
+                                            enable: true,
+                                            joinStyle: 'Round',
+                                            capStyle: 'Square',
+                                            color: [255, 255, 255, 255],
+                                        },
+                                        {
+                                            type: 'CIMSolidFill',
+                                            enable: true,
+                                            color: [39, 129, 153, 255],
+                                        },
+                                    ],
+                                },
+                            },
+                        ],
+                        scaleSymbolsProportionally: true,
+                    },
+                ],
+            },
+        },
     })
 }
 
 /**
  * Constructs and arc text label.
- * @param 
- * @returns 
+ * @param
+ * @returns
  */
- export function constructCIMArcTextSymbol({textString, proportionOfCircle}:{textString: string, proportionOfCircle:number}) {
-
-    if(proportionOfCircle>=0.95 && textString[textString.length -1 ] != " "){
-        textString += " "
+export function constructCIMArcTextSymbol({
+    textString,
+    proportionOfCircle,
+}: {
+    textString: string
+    proportionOfCircle: number
+}) {
+    if (
+        proportionOfCircle >= 0.95 &&
+        textString[textString.length - 1] != ' '
+    ) {
+        textString += ' '
     }
 
     let textSymbols: __esri.CIM.CIMMarkerGraphic[] = []
-    let ratio = (getTextWidth(textString, "1pt arial") * 0.75)
-    let radius = ((ratio / 2) * 200)/(2*proportionOfCircle)
+    let ratio = getTextWidth(textString, '1pt arial') * 0.75
+    let radius = ((ratio / 2) * 200) / (2 * proportionOfCircle)
 
-    let angleDivisions = (proportionOfCircle*2*Math.PI)/(textString.length + 1)
+    let angleDivisions =
+        (proportionOfCircle * 2 * Math.PI) / (textString.length + 1)
     let counter = 1
 
-    let startingAngle = (Math.PI * ( 0.5 - proportionOfCircle))
+    let startingAngle = Math.PI * (0.5 - proportionOfCircle)
 
-    for(let i = textString.length - 1; i >= 0; i--){
+    for (let i = textString.length - 1; i >= 0; i--) {
         textSymbols.push({
-            type: "CIMMarkerGraphic",
-            geometry: { x: (radius)*Math.cos(counter*angleDivisions + startingAngle), y: (radius)*Math.sin(counter*angleDivisions + startingAngle) },
-            symbol: {
-              type: "CIMTextSymbol",
-              fontFamilyName: "arial",
-              // fontStyleName: "Bold",
-              angle: (90 - (((counter*angleDivisions + startingAngle)/(Math.PI))*180)),
-              height: 200,
-              horizontalAlignment: "Center",
-              offsetX: 0,
-              offsetY: 0,
-              symbol: {
-                type: "CIMPolygonSymbol",
-                symbolLayers: [
-                  {
-                    type: "CIMSolidFill",
-                    enable: true,
-                    // Text Color
-                    color: [1, 1, 1, 255]
-                  }
-                ]
-              },
-              verticalAlignment: "Center"
+            type: 'CIMMarkerGraphic',
+            geometry: {
+                x: radius * Math.cos(counter * angleDivisions + startingAngle),
+                y: radius * Math.sin(counter * angleDivisions + startingAngle),
             },
-            textString: textString[i]
-          })
-          counter++
+            symbol: {
+                type: 'CIMTextSymbol',
+                fontFamilyName: 'arial',
+                // fontStyleName: "Bold",
+                angle:
+                    90 -
+                    ((counter * angleDivisions + startingAngle) / Math.PI) *
+                        180,
+                height: 200,
+                horizontalAlignment: 'Center',
+                offsetX: 0,
+                offsetY: 0,
+                symbol: {
+                    type: 'CIMPolygonSymbol',
+                    symbolLayers: [
+                        {
+                            type: 'CIMSolidFill',
+                            enable: true,
+                            // Text Color
+                            color: [1, 1, 1, 255],
+                        },
+                    ],
+                },
+                verticalAlignment: 'Center',
+            },
+            textString: textString[i],
+        })
+        counter++
     }
 
-    
     //Return CIM Symbol data
     return new CIMSymbol({
-      data: {
-        type: "CIMSymbolReference",
-        symbol: {
-          type: "CIMPointSymbol",
-          symbolLayers: [
-            {
-              type: "CIMVectorMarker",
-              enable: true,
-              size: 20,
-              rotation: 0,
-              rotateClockwise: true,
-              respectFrame: true,
-              colorLocked: true,
-              anchorPointUnits: "Relative",
-              frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
-              markerGraphics: [...textSymbols,
-            // ******* Polygon Background Symbol *********
-            {
-                type: "CIMMarkerGraphic",
-                geometry: {
-                  rings: [
-                    [
-                      [25 , 25],
-                      [-25, 25],
-                      [-25 , -25],
-                      [25 , -25]
-                    ]
-                  ]
-                },
-                symbol: {
-                  type: "CIMPolygonSymbol",
-                  symbolLayers: [{
-                    type: "CIMSolidStroke",
-                    width: 10,
-                    enable: true,
-                    color: [255, 255, 255, 255]
-                  },
-                  {
-                    type: "CIMSolidFill",
-                    enable: true,
-                    color: [39, 129, 153, 255]
-                  }
-
-                  ]
-                }
-              }],
-              scaleSymbolsProportionally: true
-            }
-          ]
-        }
-      }
-
+        data: {
+            type: 'CIMSymbolReference',
+            symbol: {
+                type: 'CIMPointSymbol',
+                symbolLayers: [
+                    {
+                        type: 'CIMVectorMarker',
+                        enable: true,
+                        size: 20,
+                        rotation: 0,
+                        rotateClockwise: true,
+                        respectFrame: true,
+                        colorLocked: true,
+                        anchorPointUnits: 'Relative',
+                        frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
+                        markerGraphics: [
+                            ...textSymbols,
+                            // ******* Polygon Background Symbol *********
+                            {
+                                type: 'CIMMarkerGraphic',
+                                geometry: {
+                                    rings: [
+                                        [
+                                            [25, 25],
+                                            [-25, 25],
+                                            [-25, -25],
+                                            [25, -25],
+                                        ],
+                                    ],
+                                },
+                                symbol: {
+                                    type: 'CIMPolygonSymbol',
+                                    symbolLayers: [
+                                        {
+                                            type: 'CIMSolidStroke',
+                                            width: 10,
+                                            enable: true,
+                                            color: [255, 255, 255, 255],
+                                        },
+                                        {
+                                            type: 'CIMSolidFill',
+                                            enable: true,
+                                            color: [39, 129, 153, 255],
+                                        },
+                                    ],
+                                },
+                            },
+                        ],
+                        scaleSymbolsProportionally: true,
+                    },
+                ],
+            },
+        },
     })
 }

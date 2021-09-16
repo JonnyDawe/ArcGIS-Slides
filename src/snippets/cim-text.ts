@@ -6,12 +6,15 @@ import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer'
 import SimpleLineSymbol from '@arcgis/core/symbols/SimpleLineSymbol'
 import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol'
 import CIMSymbol from '@arcgis/core/symbols/CIMSymbol'
-import { constructCIMArcTextSymbol, constructCIMTextLabel } from './commonsymbols'
+import {
+    constructCIMArcTextSymbol,
+    constructCIMTextLabel,
+} from './commonsymbols'
 
 const mockData: number[][] = [[-2.5991, 51.4561]]
 
 const initialGraphics = mockData.map((element) => {
-    let graphic =  new Graphic({
+    let graphic = new Graphic({
         geometry: new Point({
             longitude: element[0],
             latitude: element[1],
@@ -27,12 +30,11 @@ const initialGraphics = mockData.map((element) => {
         }),
     })
 
-    return graphic    
+    return graphic
 })
 
 const graphicsLayer = new GraphicsLayer({
     graphics: initialGraphics,
-    
 })
 
 const map = new Map({
@@ -47,9 +49,8 @@ const view = new MapView({
     map: map,
 })
 
-
-let currentSymbol: "label" | "arc" = null
-let symbolText = "Example Text"
+let currentSymbol: 'label' | 'arc' = null
+let symbolText = 'Example Text'
 
 // Varies between 0 and 1
 let symbolAngleFactor = 0.5
@@ -62,27 +63,34 @@ window.addEventListener(
         }
 
         if (m.data && m.data.input && currentSymbol) {
-            switch(m.data.inputType){
-                case "slider":
+            switch (m.data.inputType) {
+                case 'slider':
                     symbolAngleFactor = Number(m.data.argument)
                     break
-                case "text":
+                case 'text':
                     symbolText = m.data.argument
             }
             switch (currentSymbol) {
-                case "label":
+                case 'label':
                     graphicsLayer.graphics.map((graphic) => {
-                        graphic.symbol = constructCIMTextLabel({textString:symbolText, angleDegrees:((symbolAngleFactor-0.5)/0.5)*180})
+                        graphic.symbol = constructCIMTextLabel({
+                            textString: symbolText,
+                            angleDegrees:
+                                ((symbolAngleFactor - 0.5) / 0.5) * 180,
+                        })
                     })
-                    break;
+                    break
 
-                case "arc":
+                case 'arc':
                     graphicsLayer.graphics.map((graphic) => {
-                        graphic.symbol = constructCIMArcTextSymbol({textString: symbolText, proportionOfCircle: symbolAngleFactor})
+                        graphic.symbol = constructCIMArcTextSymbol({
+                            textString: symbolText,
+                            proportionOfCircle: symbolAngleFactor,
+                        })
                     })
-                    break;
+                    break
                 default:
-                    break;
+                    break
             }
         }
     },
@@ -91,27 +99,25 @@ window.addEventListener(
 
 function play(message: string) {
     switch (message) {
-        case "simple":
-            currentSymbol = "label"
+        case 'simple':
+            currentSymbol = 'label'
             graphicsLayer.graphics.map((graphic) => {
-        graphic.symbol = constructCIMTextLabel({textString:symbolText, angleDegrees:((symbolAngleFactor-0.5)/0.5)*180})
-    })
-            break;
+                graphic.symbol = constructCIMTextLabel({
+                    textString: symbolText,
+                    angleDegrees: ((symbolAngleFactor - 0.5) / 0.5) * 180,
+                })
+            })
+            break
 
-        case "complex":
-            currentSymbol = "arc"
+        case 'complex':
+            currentSymbol = 'arc'
             graphicsLayer.graphics.map((graphic) => {
-                graphic.symbol = constructCIMArcTextSymbol({textString: symbolText, proportionOfCircle: symbolAngleFactor})
+                graphic.symbol = constructCIMArcTextSymbol({
+                    textString: symbolText,
+                    proportionOfCircle: symbolAngleFactor,
+                })
             })
         default:
-            break;
+            break
     }
 }
-
-
-
-
-
-
-
-

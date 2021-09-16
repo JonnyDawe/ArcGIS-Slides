@@ -1,7 +1,9 @@
-html, body, #viewDiv {
+html,
+body,
+#viewDiv {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: "Avenir", "Lato", sans-serif;
-  }
+    font-family: 'Avenir', 'Lato', sans-serif;
+}
