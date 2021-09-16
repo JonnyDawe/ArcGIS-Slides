@@ -42,7 +42,7 @@ $ npm run start
 
 ## Attribution:
 
-This porject was heavily inspired and adapted from this [repo](https://github.com/jkieboom/devsummit-palm-springs-2017/tree/gh-pages/controlling-camera-3d-navigation) created by [jkieboom](https://github.com/jkieboom) for the 2017 Esri Dev Summit. It has been adapted to use @arcgis/core ES Modules and webpack.
+This project was heavily inspired and adapted from this [repo](https://github.com/jkieboom/devsummit-palm-springs-2017/tree/gh-pages/controlling-camera-3d-navigation) created by [jkieboom](https://github.com/jkieboom) for the 2017 Esri Dev Summit. It has been adapted to use @arcgis/core ES Modules and webpack.
 
 ## License
 

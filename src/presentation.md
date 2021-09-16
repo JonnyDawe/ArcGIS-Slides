@@ -642,3 +642,10 @@ function constructCIMArcTextSymbol({textString, proportionOfCircle}){
     <iframe id="frame-cim-text" data-src="./snippet.html?cim-text"></iframe>
   </div>
 </div>
+
+---
+
+## Links:
+
+-   [Presentation Repo (ArcGIS + RevealJS)](https://github.com/JonnyDawe/ArcGIS-Slides)
+-   [Hosted Slides](https://jonnydawe.github.io/ArcGIS-Slides/)
