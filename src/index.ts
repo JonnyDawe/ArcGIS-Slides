@@ -3,12 +3,12 @@ import './styles/main.css'
 import Reveal from 'reveal.js'
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js'
 import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js'
-(Reveal as RevealStatic)
+;(Reveal as RevealStatic)
     .initialize({
         center: true,
         transition: 'slide',
-        width: '85%',
-        height: '85%',
+        width: 1366,
+        height: 768,
         margin: 0.04,
 
         plugins: [Markdown, Highlight],
