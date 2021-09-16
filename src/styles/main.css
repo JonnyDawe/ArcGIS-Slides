@@ -610,3 +610,9 @@ input[type='range']::-moz-range-thumb {
     font-size: var(--r-label-size);
     padding-bottom: var(--r-label-padding);
 }
+
+.image-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
