@@ -6,7 +6,7 @@ reveal.js is an open source HTML presentation framework.
 
 ## Demo
 
-[link](link)
+[CIM Symbology Dev Presentation](https://jonnydawe.github.io/ArcGIS-Slides/)
 
 ## Installation
 
