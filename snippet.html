@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Snippet</title>
+        <link rel="stylesheet" href="styles/map.css" />
+        <link
+            rel="stylesheet"
+            href="https://js.arcgis.com/4.19/@arcgis/core/assets/esri/themes/light/main.css"
+        />
+        <script>
+            let script = document.createElement('script')
+            script.type = 'module'
+            script.src = `./${document.location.search.substring(1)}.js`
+            script.onload = (snippet) => {
+                console.log(snippet)
+            }
+            document.head.appendChild(script)
+        </script>
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>
