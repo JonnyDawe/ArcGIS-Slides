@@ -13,7 +13,7 @@ reveal.js is an open source HTML presentation framework.
 Clone this repository to your machine.
 
 ```bash
-$ git clone https://github.com/hakimel/reveal.js.git
+$ git clone https://github.com/JonnyDawe/ArcGIS-Slides
 ```
 
 Navigate to the root folder and install dependencies.
