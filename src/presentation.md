@@ -12,7 +12,7 @@
 -   Cartographic descriptions of GIS datasets represented in JSON.
 -   Used for **maps**, **scenes**, **layouts**, **layers**, **symbols**
 
-```json [2 | 10-15 |284-390]
+```json [2 | 8-15 |277-390]
 {
     "type": "CIMLayerDocument",
     "version": "2.8.0",
