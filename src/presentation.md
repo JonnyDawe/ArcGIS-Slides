@@ -6,16 +6,9 @@
 
 ---
 
-## Background:
+## [What is CIM?](https://github.com/Esri/cim-spec)
 
-<div class="image-flex">
-  <img data-src="./assets/exampleCIM.png" data-preload>
-  <img data-src="./assets/CIMconfig.png" data-preload>
-</div>
----
-
-## [Cartographic Information Model (CIM)](https://github.com/Esri/cim-spec)
-
+-   CIM = Cartographic Information Model
 -   Cartographic descriptions of GIS datasets represented in JSON.
 -   Used for **maps**, **scenes**, **layouts**, **layers**, **symbols**
 
@@ -409,6 +402,12 @@
 
 ---
 
+## CIM Symbols in the Desktop:
+
+<img data-src="./assets/CIM-Pro-Demo.gif" data-preload>
+
+---
+
 # Why is this important?
 
 1.  Increased support coming to the wider ArcGIS platform. <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -448,7 +447,7 @@ const symbol = new CIMSymbol({
 
   </div>
 
-Complex Attribute Driven Symbol
+Construct Attribute Driven Symbols:
 
 <div class="snippet">
 
@@ -477,7 +476,7 @@ Use [SymbolLayers](https://pro.arcgis.com/en/pro-app/latest/help/mapping/layer-p
 
 <div class="two-col">
   <div class="snippets full-height-blocks">
-  Build up symbol layers
+  Build Up Symbol Layers
   <div class="snippet">
 
 ```js [0|7-24|25-34|35-44]
@@ -535,7 +534,7 @@ const symbol = new CIMSymbol({
 
   </div>
 
-One Geometry - complex derived symbology
+One Geometry - Complex Derived Symbology
 
 <div class="snippet">
 
@@ -599,7 +598,7 @@ function constructCIMTextLabel(textString: string, angle: number){
 
   </div>
 
-Fun Examples!
+Manipulate Text:
 
 <div class="snippet">
 
@@ -647,5 +646,6 @@ function constructCIMArcTextSymbol({textString, proportionOfCircle}){
 
 ## Links:
 
+-   [CIM Symbol Code Snippets](https://github.com/JonnyDawe/ArcGIS-Slides/blob/main/src/snippets/commonsymbols.ts)
 -   [Presentation Repo (ArcGIS + RevealJS)](https://github.com/JonnyDawe/ArcGIS-Slides)
 -   [Hosted Slides](https://jonnydawe.github.io/ArcGIS-Slides/)
