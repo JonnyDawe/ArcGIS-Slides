@@ -65,13 +65,13 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
                         enable: true,
                         size: 35,
                         colorLocked: true,
-                        anchorPointUnits: 'Relative',
                         frame: { xmin: 0, ymin: 0, xmax: 100, ymax: 100 },
                         markerGraphics: [
                             //*************** PARKING MARKER SYMBOL**************/
                             // TEXT SYMBOL + TWO CIRCLES
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
                                 geometry: { x: 50, y: 50 },
                                 symbol: {
                                     type: 'CIMTextSymbol',
@@ -81,6 +81,7 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
                                     horizontalAlignment: 'Center',
                                     offsetX: 0,
                                     offsetY: 0,
+                                    haloSymbol: null,
                                     symbol: {
                                         type: 'CIMPolygonSymbol',
                                         symbolLayers: [
@@ -97,6 +98,8 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         circleGenerator({
@@ -119,6 +122,8 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         circleGenerator({
@@ -132,6 +137,7 @@ export function generateCIMParkingSymbol(): __esri.CIMSymbol {
                                     type: 'CIMPolygonSymbol',
                                     symbolLayers: [
                                         {
+                                            enable: true,
                                             type: 'CIMSolidStroke',
                                             width: 5.5,
                                             color: [255, 255, 255, 255],
@@ -180,6 +186,8 @@ export function generateCapacitySymbol({
                             // TWO BOXES
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -203,6 +211,8 @@ export function generateCapacitySymbol({
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -229,6 +239,7 @@ export function generateCapacitySymbol({
                             // TEXT SYMBOL + TWO CIRCLES
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
                                 geometry: { x: 50, y: 50 },
                                 symbol: {
                                     type: 'CIMTextSymbol',
@@ -238,6 +249,7 @@ export function generateCapacitySymbol({
                                     horizontalAlignment: 'Center',
                                     offsetX: 0,
                                     offsetY: 0,
+                                    haloSymbol: null,
                                     symbol: {
                                         type: 'CIMPolygonSymbol',
                                         symbolLayers: [
@@ -254,6 +266,8 @@ export function generateCapacitySymbol({
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         circleGenerator({
@@ -276,6 +290,8 @@ export function generateCapacitySymbol({
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         circleGenerator({
@@ -289,6 +305,7 @@ export function generateCapacitySymbol({
                                     type: 'CIMPolygonSymbol',
                                     symbolLayers: [
                                         {
+                                            enable: true,
                                             type: 'CIMSolidStroke',
                                             width: 5.5,
                                             color: [255, 255, 255, 255],
@@ -310,9 +327,10 @@ export function generateCapacitySymbol({
     })
 }
 
-const redExclamation: __esri.CIM.CIMMarkerGraphic[] = [
+const redExclamation: __esri.CIMMarkerGraphic[] = [
     {
         type: 'CIMMarkerGraphic',
+        primitiveName: '',
         geometry: { x: 77, y: 18 },
         symbol: {
             type: 'CIMTextSymbol',
@@ -322,6 +340,7 @@ const redExclamation: __esri.CIM.CIMMarkerGraphic[] = [
             horizontalAlignment: 'Center',
             offsetX: 0,
             offsetY: 0,
+            haloSymbol: null,
             symbol: {
                 type: 'CIMPolygonSymbol',
                 symbolLayers: [
@@ -338,6 +357,8 @@ const redExclamation: __esri.CIM.CIMMarkerGraphic[] = [
     },
     {
         type: 'CIMMarkerGraphic',
+        primitiveName: '',
+        textString: '',
         geometry: {
             rings: [
                 circleGenerator({
@@ -377,7 +398,7 @@ export function simpleDashedCIM(): __esri.CIMSymbol {
                                 type: 'CIMGeometricEffectDashes',
                                 dashTemplate: [2, 2, 2, 2], // width of dashes and spacing between the dashes
                                 lineDashEnding: 'NoConstraint',
-                                controlPointEnding: 'NoConstraint',
+                                offsetAlongLine: 0,
                             },
                         ],
                         enable: true, // must be set to true in order for the symbol layer to be visible
@@ -426,10 +447,7 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                     {
                         type: 'CIMVectorMarker',
                         enable: true,
-                        anchorPointUnits: 'Relative',
-                        dominantSizeAxis3D: 'Y',
                         size: 42,
-                        billboardMode3D: 'FaceNearPlane',
                         markerPlacement: {
                             type: 'CIMMarkerPlacementAtRatioPositions',
                             angleToLine: false,
@@ -445,6 +463,8 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         markerGraphics: [
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -677,6 +697,8 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -901,8 +923,6 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                                             enable: true,
                                             capStyle: 'Butt',
                                             joinStyle: 'Miter',
-                                            lineStyle3D: 'Strip',
-                                            miterLimit: 4,
                                             width: 7.215240515336629,
                                             color: [255, 0, 0, 255],
                                         },
@@ -911,6 +931,8 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                             },
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -1075,29 +1097,11 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         ],
                         scaleSymbolsProportionally: true,
                         respectFrame: true,
-                        clippingPath: {
-                            type: 'CIMClippingPath',
-                            clippingType: 'Intersect',
-                            path: {
-                                rings: [
-                                    [
-                                        [0, 0],
-                                        [200, 0],
-                                        [200, 200],
-                                        [0, 200],
-                                        [0, 0],
-                                    ],
-                                ],
-                            },
-                        },
                     },
                     {
                         type: 'CIMVectorMarker',
                         enable: true,
-                        anchorPointUnits: 'Relative',
-                        dominantSizeAxis3D: 'Y',
                         size: 36,
-                        billboardMode3D: 'FaceNearPlane',
                         markerPlacement: {
                             type: 'CIMMarkerPlacementAtRatioPositions',
                             angleToLine: true,
@@ -1113,6 +1117,8 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         markerGraphics: [
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -1997,24 +2003,6 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         ],
                         scaleSymbolsProportionally: true,
                         respectFrame: true,
-                        clippingPath: {
-                            type: 'CIMClippingPath',
-                            clippingType: 'Intersect',
-                            path: {
-                                rings: [
-                                    [
-                                        [0, 0],
-                                        [81.0370101928710938, 0],
-                                        [
-                                            81.0370101928710938,
-                                            79.5699996948242188,
-                                        ],
-                                        [0, 79.5699996948242188],
-                                        [0, 0],
-                                    ],
-                                ],
-                            },
-                        },
                     },
                     {
                         type: 'CIMSolidStroke',
@@ -2036,8 +2024,6 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         enable: true,
                         capStyle: 'Round',
                         joinStyle: 'Round',
-                        lineStyle3D: 'Strip',
-                        miterLimit: 10,
                         width: 2,
                         color: [178, 178, 178, 255],
                     },
@@ -2061,8 +2047,6 @@ export function generatePlane(position: number): __esri.CIMSymbol {
                         enable: true,
                         capStyle: 'Round',
                         joinStyle: 'Round',
-                        lineStyle3D: 'Strip',
-                        miterLimit: 10,
                         width: 2,
                         color: [178, 178, 178, 255],
                     },
@@ -2111,17 +2095,18 @@ export function constructCIMTextLabel({
                         rotateClockwise: true,
                         respectFrame: true,
                         colorLocked: true,
-                        anchorPointUnits: 'Relative',
                         frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
                         markerGraphics: [
                             // ******* Text Symbol *********
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
                                 geometry: { x: 0, y: 0 },
                                 symbol: {
                                     type: 'CIMTextSymbol',
                                     fontFamilyName: 'arial',
                                     // fontStyleName: "Bold",
+                                    haloSymbol: null,
                                     angle: angleDegrees,
                                     height: 200,
                                     horizontalAlignment: 'Center',
@@ -2145,6 +2130,8 @@ export function constructCIMTextLabel({
                             // ******* Polygon Background Symbol *********
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
@@ -2206,7 +2193,7 @@ export function constructCIMArcTextSymbol({
         textString += ' '
     }
 
-    let textSymbols: __esri.CIM.CIMMarkerGraphic[] = []
+    let textSymbols: __esri.CIMMarkerGraphic[] = []
     let ratio = getTextWidth(textString, '1pt arial') * 0.75
     let radius = ((ratio / 2) * 200) / (2 * proportionOfCircle)
 
@@ -2219,6 +2206,7 @@ export function constructCIMArcTextSymbol({
     for (let i = textString.length - 1; i >= 0; i--) {
         textSymbols.push({
             type: 'CIMMarkerGraphic',
+            primitiveName: '',
             geometry: {
                 x: radius * Math.cos(counter * angleDivisions + startingAngle),
                 y: radius * Math.sin(counter * angleDivisions + startingAngle),
@@ -2227,6 +2215,7 @@ export function constructCIMArcTextSymbol({
                 type: 'CIMTextSymbol',
                 fontFamilyName: 'arial',
                 // fontStyleName: "Bold",
+                haloSymbol: null,
                 angle:
                     90 -
                     ((counter * angleDivisions + startingAngle) / Math.PI) *
@@ -2268,13 +2257,14 @@ export function constructCIMArcTextSymbol({
                         rotateClockwise: true,
                         respectFrame: true,
                         colorLocked: true,
-                        anchorPointUnits: 'Relative',
                         frame: { xmin: -100, ymin: -100, xmax: 100, ymax: 100 },
                         markerGraphics: [
                             ...textSymbols,
                             // ******* Polygon Background Symbol *********
                             {
                                 type: 'CIMMarkerGraphic',
+                                primitiveName: '',
+                                textString: '',
                                 geometry: {
                                     rings: [
                                         [
